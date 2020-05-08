@@ -11,6 +11,7 @@ import re
 import sys
 import logging
 import lightgbm as lgb
+from collections import Counter, defaultdict
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_score, recall_score, roc_auc_score
 
@@ -119,13 +120,7 @@ def main(args):
     df_ad.loc[df_ad['industry'] == '\\N', 'industry'] = 0
     df_user['gender'] = df_user['gender'] - 1
 
-    # 减少数据量
-    df_user = df_user.head(10000)
-    df_click_log = df_click_log[df_click_log.user_id.isin(df_user.user_id)]
-    df_click_log = df_click_log.merge(df_ad, how='left')
-
-    df_train = df_user.head(8000)
-    df_dev = df_user.iloc[8000:]
+    df_train, df_dev = train_test_split(df_user, test_size=0.2, random_state=2020)
 
     df_feat = get_features(df_click_log)
 
@@ -155,7 +150,9 @@ def main(args):
     df_res = df_feat_test[['user_id']]
     df_test = df_feat_test.drop(['user_id'], axis=1)
     df_res['predicted_age'] = gbm_age.predict(df_test)
-    df_res['predicted_gender'] = gbm_gender.predict(df_test) + 1
+    df_res['predicted_gender'] = gbm_gender.predict(df_test)
+    df_res.loc[df_res['predicted_gender'] >= 0.5, 'predicted_gender'] = 2
+    df_res.loc[df_res['predicted_gender'] < 0.5, 'predicted_gender'] = 1
     df_res.to_csv("data/submission.csv", index=False)
 
 

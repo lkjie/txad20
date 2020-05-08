@@ -12,7 +12,7 @@ config = CosConfig(Region=region, SecretId=secret_id, SecretKey=secret_key, Toke
 client = CosS3Client(config)
 
 # 文件流 简单上传
-file_name = 'data/submission.csv'
+file_name = 'submission.csv'
 with open(file_name, 'rb') as fp:
     response = client.put_object(
         Bucket='txad-1252070910',  # Bucket由bucketname-appid组成
