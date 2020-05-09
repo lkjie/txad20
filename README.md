@@ -17,3 +17,7 @@ python preprocess.py
 ## 提交
 利用cosupload提交，首先需要在COS上申请secret_id和secret_key
 https://console.cloud.tencent.com/cam/capi
+
+```python
+python cosupload.py
+```

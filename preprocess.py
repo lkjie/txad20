@@ -141,7 +141,7 @@ def main(args):
     df_res['predicted_gender'] = gbm_gender.predict(df_test)
     df_res.loc[df_res['predicted_gender'] >= 0.5, 'predicted_gender'] = 2
     df_res.loc[df_res['predicted_gender'] < 0.5, 'predicted_gender'] = 1
-    df_res.to_csv("data/submission.csv", index=False)
+    df_res.to_csv("submission.csv", index=False)
 
 
 if __name__ == '__main__':
