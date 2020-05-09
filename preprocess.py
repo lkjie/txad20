@@ -23,18 +23,6 @@ logging.getLogger().setLevel(logging.INFO)
 
 
 '''
-（1）原始onehot特征，比如aid，age，gender等。
-（2）向量特征，比如interest1，interest2，topic1，kw1等
-（3）向量长度统计特征：interest1，interest2，interest5的长度统计。
-（4）uid类的统计特征，uid的出现次数，uid的正样本次数，以及uid与ad特征的组合出现次数，组合正样本次数。
-（5）uid的序列特征，比如uid=1时，总共出现了5次，序列为[-1,1,-1,-1,-1]，
-则第一次出现时，特征为【】
-第二次出现时，特征为【-1】
-第三次出现时，特征为【-1，1】
-第四次出现时，特征为【-1，1，-1】
-第五次出现时，特征为【-1，1，-1，-1】
-（6）组合特征：age与aid的组合，gender与aid的组合，interest1与aid的组合，interest2与aid的组合，topic1与topic2的组合，LBS与kw1的组合。
-
 
 统计特征：
 user纬度：点击广告总次数，creative_id个数，
