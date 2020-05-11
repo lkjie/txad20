@@ -17,7 +17,6 @@ client = CosS3Client(config)
 
 '''
 url: 
-https://txad-1252070910.cos.ap-shanghai.myqcloud.com/submission.csv
 '''
 
 
@@ -72,7 +71,7 @@ file_name = 'submission.csv'
 # file_name = 'cosupload.py'
 with open(file_name, 'rb') as fp:
     url = put_object(client,
-        Bucket='txad-1252070910',  # Bucket由bucketname-appid组成
+        Bucket='',  # Bucket由bucketname-appid组成，填自己的bucket号
         Body=fp,
         Key=file_name,
         StorageClass='STANDARD',
